@@ -11,7 +11,7 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-                        <!--                         <div class="form-group row">
+                    <!--<div class="form-group row">
                             <label for="login" class="col-sm-4 col-form-label text-md-right">{{ __('Login') }}</label>
                          
                             <div class="col-md-6">
@@ -27,19 +27,19 @@
 
 
 
-<div class="form-group row">
-    <label for="login" class="col-md-4 col-form-label text-md-right">{{ __('Login') }}</label>
+                        <div class="form-group row">
+                            <label for="login" class="col-md-4 col-form-label text-md-right">{{ __('Login') }}</label>
 
-    <div class="col-md-6">
-        <input id="login" type="text" class="form-control{{ $errors->has('login') ? ' is-invalid' : '' }}" name="login" value="{{ old('login') }}" required autofocus>
+                            <div class="col-md-6">
+                                <input id="login" type="text" class="form-control{{ $errors->has('login') ? ' is-invalid' : '' }}" name="login" value="{{ old('login') }}" required autofocus>
 
-        @if ($errors->has('login'))
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $errors->first('login') }}</strong>
-            </span>
-        @endif
-    </div>
-</div> 
+                                @if ($errors->has('login'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('login') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div> 
  
 <!-- 
                         <div class="form-group row">

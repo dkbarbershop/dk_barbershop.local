@@ -11,10 +11,17 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('barbershop');
-});
+});*/
+
+//Auth::routes();
+//Route::get('/', 'HomeController@index')->name('home');
+/*Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/test', 'TestController@index')->name('test');*/
+
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware'=>['web','auth']],function(){
+    Route::get('/','BarberShop\LoginController@index')->name('login_index');
+});

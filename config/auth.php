@@ -11,6 +11,11 @@ return [
     | reset options for your application. You may change these defaults
     | as required, but they're a perfect start for most applications.
     |
+    | Эта опция контролирует аутентификацию по умолчанию «сторож» и пароль
+    | сбросить настройки для вашего приложения. Вы можете изменить эти 
+    | значения по умолчанию
+    | как требуется, но они являются идеальным началом для большинства 
+    | приложений
     */
 
     'defaults' => [
