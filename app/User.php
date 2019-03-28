@@ -29,7 +29,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function roles(){
+/*    public function roles(){
         return $this->belongsToMany('App\Models\Role');
-    }
+    }*/
 }

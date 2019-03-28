@@ -1,0 +1,10 @@
+
+body{ 
+	/* --bg-color: lightgoldenrodyellow; */
+	--bg-color: mistyrose;
+ 	background: var(--bg-color); 
+}
+.navbar{
+	background: var(--bg-color);
+	text-align: right;
+}

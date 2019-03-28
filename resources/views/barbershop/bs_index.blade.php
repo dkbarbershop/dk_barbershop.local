@@ -1,0 +1,2 @@
+@extends('barbershop.layouts.bs')
+

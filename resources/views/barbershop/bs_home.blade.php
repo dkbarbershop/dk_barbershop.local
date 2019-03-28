@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('barbershop.layouts.bs')
 
 @section('content')
 <div class="container">
@@ -15,6 +15,7 @@
                     @endif
 
                     You are logged in!
+                    this is bs_home
                 </div>
                 <div class="card-body">
                     {{$user_role}}
