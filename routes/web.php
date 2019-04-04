@@ -29,12 +29,27 @@ Route::group(['middleware'=>['web','auth']],function(){
     Route::get('/','BarberShop\LoginController@index')->name('login_index');
 });
 
-Route::group(['prefix'=>'superroot','middleware'=>['web','auth']],function(){
+Route::group(['prefix'=>'superroot','middleware'=>['web','auth','issuperroot']],function(){
     Route::get('object','Barbershop\ObjectController@index')->name('object_index');
     Route::get('user','Barbershop\UserController@index')->name('user_index');
 });
 
-Route::group(['prefix'=>'director','middleware'=>['web','auth']],function(){
+Route::group(['prefix'=>'director','middleware'=>['web','auth','isdirector']],function(){
     Route::get('results','Barbershop\DirectorController@results')->name('director_results');
-    Route::get('analytics','Barbershop\Director@analytics')->name('director_analitics');
+    Route::get('work','Barbershop\DirectorController@work')->name('director_work');
+});
+
+Route::group(['prefix'=>'administrator','middleware'=>['web','auth','isadministrator']],function(){
+    Route::get('main','Barbershop\AdministratorController@main')->name('administrator_main');
+    Route::get('hairdressers','Barbershop\AdministratorController@hairdresses')->name('administrator_hairdresses');
+});
+
+Route::group(['prefix'=>'hairdresser','middleware'=>['web','auth','ishairdresser']],function(){
+    Route::get('main','Barbershop\HairdresserController@main')->name('hairdresser_main');
+    Route::get('settings','Barbershop\HairdresserController@settings')->name('hairdresser_settings');
+});
+
+Route::group(['prefix'=>'user','middleware'=>['web','auth','isuser']],function(){
+    Route::get('main','Barbershop\UserController@main')->name('user_main');
+    Route::get('settings','Barbershop\UserController@settings')->name('user_settings');
 });

@@ -86,6 +86,21 @@ class UserController extends Controller
      */
     public function destroy(user $user)
     {
-        //
+     
+    }
+    public function main(){
+        $user = Auth::user();
+        if (view()->exists('barbershop.user.main')){
+            return view('barbershop.user.main',['user_role'=>$user->role]);
+        }
+        abort(404);
+
+    }
+    public function settings(){
+        $user = Auth::user();
+        if (view()->exists('barbershop.user.settings')){
+            return view('barbershop.user.settings',['user_role'=>$user->role]);
+        }
+        abort(404);
     }
 }

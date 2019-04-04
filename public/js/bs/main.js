@@ -26,6 +26,6 @@
     }
 
     ai.classList.add("active");
-    console.log(ai); 
+    
 
   }

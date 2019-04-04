@@ -12,28 +12,29 @@ body{
 }
 #dk-left-menu>li>a.active{
 	/* background: darkviolet;  */
-	background:darkcyan;
+	background:maroon;
 	color: white;
 }
 #dk-left-menu>li>a{
-	color: darkcyan;
+	color: maroon;
 }
 .dk-main-class{
-	color: darkcyan;
-	border-color: darkcyan;
+	color: maroon;
+	border-color: maroon;
 }
 #dk-left-menu>li:hover {
-	background: powderblue;
-	color: darkcyan;
+	background: Tan;
+	color: maroon;
 }
 .dk-main-class:hover{
-	background: powderblue;
-	color: darkcyan;	
+	background: Tan;
+	color: maroon;
+	border-color: SaddleBrown;
 }
 btn:hover{
-	background: powderblue;
-	color: darkcyan;		
+	background: Tan;
+	color: maroon;		
 }
 btn.active{
-	background:darkcyan;
+	background:maroon;
 }
