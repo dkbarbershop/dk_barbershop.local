@@ -7,16 +7,18 @@
     <div id="app">
         <div class="container-fluid"> 
             @include ('barbershop.layouts.navbar')    
-            <div class="row vh-main-bottom">  
-                <div class="col-2">
-                    3
+            <div class="row vh-main-bottom ">  
+                <div class="col-2 px-0 dk-rs">
+                    @include ('barbershop.layouts.left_menu')
                 </div>
-                <div class="col-10">
-                    4
+                <div class="col-10 dk-ls">
+                    @yield('content')
                 </div> 
             </div>
         </div>
     </div>
+@include ('barbershop.layouts.about')  
+<script type="text/javascript" src="{{ asset('js/bs/main.js') }}"></script>
 </body>
 </html>
 

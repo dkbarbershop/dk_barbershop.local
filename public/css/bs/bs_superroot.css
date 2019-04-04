@@ -1,10 +1,39 @@
 
 body{ 
 	/* --bg-color: lightgoldenrodyellow; */
-	--bg-color: mistyrose;
- 	background: var(--bg-color); 
+	/* --bg-color: mistyrose; */
+ 	/* background: var(--bg-color);  */
+ 	/* background:mistyrose; */
+ 	background:mistyrose;
 }
 .navbar{
-	background: var(--bg-color);
+	/* background: var(--bg-color); */
 	text-align: right;
+}
+#dk-left-menu>li>a.active{
+	/* background: darkviolet;  */
+	background:darkcyan;
+	color: white;
+}
+#dk-left-menu>li>a{
+	color: darkcyan;
+}
+.dk-main-class{
+	color: darkcyan;
+	border-color: darkcyan;
+}
+#dk-left-menu>li:hover {
+	background: powderblue;
+	color: darkcyan;
+}
+.dk-main-class:hover{
+	background: powderblue;
+	color: darkcyan;	
+}
+btn:hover{
+	background: powderblue;
+	color: darkcyan;		
+}
+btn.active{
+	background:darkcyan;
 }
