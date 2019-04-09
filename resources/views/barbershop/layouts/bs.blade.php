@@ -11,7 +11,7 @@
                 <div class="col-2 px-0 dk-rs">
                     @include ('barbershop.layouts.left_menu')
                 </div>
-                <div class="col-10 dk-ls">
+                <div class="col-10 dk-ls px-0">
                     @yield('content')
                 </div> 
             </div>

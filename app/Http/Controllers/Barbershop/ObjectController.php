@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Barbershop;
 
-use App\Models\Objects;
+use App\Models\BsObject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +18,9 @@ class ObjectController extends Controller
     {   
         $user = Auth::user();
         if (view()->exists('barbershop.superroot.objects')){
-            return view('barbershop.superroot.objects',['user_role'=>$user->role]);
+            $bsobjects = $this->getObjects();
+            /*dd($bsobjects);*/
+            return view('barbershop.superroot.objects',['user_role'=>$user->role,'bsobjects'=>$bsobjects]);
         }
         abort(404);
     }
@@ -88,4 +90,9 @@ class ObjectController extends Controller
     {
         //
     }
+    public function getObjects(){
+       $bsobjects = BsObject::all();
+       return $bsobjects;
+    }
+
 }
