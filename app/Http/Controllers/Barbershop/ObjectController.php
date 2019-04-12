@@ -19,7 +19,6 @@ class ObjectController extends Controller
         $user = Auth::user();
         if (view()->exists('barbershop.superroot.objects')){
             $bsobjects = $this->getObjects();
-            /*dd($bsobjects);*/
             return view('barbershop.superroot.objects',['user_role'=>$user->role,'bsobjects'=>$bsobjects]);
         }
         abort(404);

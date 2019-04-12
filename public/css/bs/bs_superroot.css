@@ -1,35 +1,10 @@
-
 body{ 
-	/* --bg-color: lightgoldenrodyellow; */
-	/* --bg-color: mistyrose; */
- 	/* background: var(--bg-color);  */
- 	/* background:mistyrose; */
  	background:mistyrose;
 }
-.navbar{
-	/* background: var(--bg-color); */
-	text-align: right;
-}
-#dk-left-menu>li>a.active{
-	/* background: darkviolet;  */
-	background:maroon;
-	color: white;
-}
-#dk-left-menu>li>a{
-	color: maroon;
-}
+
 .dk-main-class{
 	color: maroon;
 	border-color: maroon;
-}
-#dk-left-menu>li:hover {
-	background: pink;
-	color: maroon;
-}
-.dk-main-class:hover{
-	background: pink;
-	color: maroon;
-	border-color: SaddleBrown;
 }
 .btn:hover{
 	background: pink;
@@ -39,34 +14,28 @@ body{
 .btn:active{
 	background:pink;
 }
+.dk-main-class:hover{
+	background: pink;
+	color: maroon;
+	border-color: SaddleBrown;
+}
+
+#dk-left-menu>li>a.active{
+	background: darkviolet;
+	background:maroon;
+	color: white;
+}
+#dk-left-menu>li>a{
+	color: maroon;
+}
+#dk-left-menu>li:hover {
+	background: pink;
+	color: maroon;
+}
 .dk-div-border{
 	border: 1px solid maroon; 
 	border-radius: 7px;
 }
-.dk-btn-contecst{
-	color: white;
-	border-color: maroon;
-	background: maroon;
-	width: 120px;
-	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 maroon;
-	/* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
-}
-.dk-btn-contecst:active{
-	/* background: peru;  */
-	/* background: green; */
-	box-shadow: none;
-	/* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 maroon; */
-}
-.dk-btn-contecst:hover{
-    background: pink; 
-/*box-shadow: none; */
-}
-.dk-btn-contecst:target{
-/* 	background: navy; 
-box-shadow: none; */
-}
-
-/*******************************/
 .table>thead>tr{
 	background: maroon;
 	color: white;
@@ -86,11 +55,57 @@ box-shadow: none; */
   background: coral;
   cursor: pointer;
 }
+.dk-btn-contecst{
+	color: white;
+	border-color: maroon;
+	background: maroon;
+	width: 120px;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 maroon;
+	/* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+}
+.dk-btn-contecst:active{
+	background: peru;
+	background: green;
+	box-shadow: none;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 maroon;
+}
+.dk-btn-contecst:hover{
+    background: pink; 
+box-shadow: none;
+}
+.dk-btn-contecst:target{
+background: navy; 
+box-shadow: none;
+}
+.dk-h-10p{
+	height: 10%;
+}
+.dk-h-90p{
+	height: 90%;
+}
+.dk-text-color{
+	color: maroon;
+}
+#dk-data-table{
+	border: 1px solid maroon;
+	background: pink;
+}
+#dk-data-table>tbody>tr{
+	border: 1px solid maroon;
+}
+#dk-data-table>tbody>tr>td{
+	border: 1px solid maroon;
+}
 
-/*******************************/
-
-
-
-
-
-
+.dk-font-bold{
+	font-weight: bold;
+}
+.dk-text-r{
+	text-align: right;
+}
+/* 
+.navbar{
+	background: mistyrose;
+	text-align: right;
+}
+ */

@@ -13,8 +13,6 @@
      var  left_menu_items = document.getElementsByClassName('dk-menu-item'),
           active_item_name= document.getElementById('active_menu_item'),
           ai;
-
-      
     if (! active_item_name){
       ai = document.getElementById('menu_item_exit');
     }else{

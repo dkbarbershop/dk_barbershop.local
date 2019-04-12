@@ -1,4 +1,6 @@
-{{--@extends('barbershop.layouts.bs')--}}
+bs_index
+
+{{--@extends('barbershop.layouts.bs')
 @if ( $user_role == 'SuperRoot' )
 	@include('barbershop.superroot.objects')
 @endif
@@ -17,4 +19,4 @@
 
 @if ( $user_role == NULL )
 	@include('barbershop.layouts.bs')
-@endif
+@endif --}}

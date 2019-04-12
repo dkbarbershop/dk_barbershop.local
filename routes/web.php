@@ -29,6 +29,10 @@ Route::group(['middleware'=>['web','auth']],function(){
     Route::get('/','BarberShop\LoginController@index')->name('login_index');
 });
 
+Route::group(['prefix'=>'error','middleware'=>['web','auth']],function(){
+    Route::get('unrole','Barbershop\ErrorController@unroleUser')->name('error_unrole');
+});
+
 Route::group(['prefix'=>'superroot','middleware'=>['web','auth','issuperroot']],function(){
     Route::get('object','Barbershop\ObjectController@index')->name('object_index');
     Route::get('user','Barbershop\UserController@index')->name('user_index');

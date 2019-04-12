@@ -36,6 +36,3 @@
     @if ( $user_role == NULL )
     <link href="{{ asset('css/bs/bs_null.css') }}" rel="stylesheet">
     @endif
-
-    <!-- Для таблиц -->
-    <!-- <script type="text/javascript" src="js/bs/jquery.js"></script> -->

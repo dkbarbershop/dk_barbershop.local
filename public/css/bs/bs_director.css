@@ -9,12 +9,12 @@ body{
  	background:azure;
  	
 }
-.navbar{
-	/* background: azure;  */
+/* .navbar{
+	background: azure;
 	text-align: right;
 }
 #dk-left-menu>li>a.active{
-	/* background: darkviolet;  */
+	background: darkviolet;
 	background:darkcyan;
 	color: white;
 }
@@ -40,3 +40,4 @@ btn:hover{
 btn.active{
 	background:darkcyan;
 }
+ */
