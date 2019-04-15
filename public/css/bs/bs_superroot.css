@@ -42,6 +42,7 @@ body{
 }
 .table>thead>tr>th{
 	border-right: 1px solid white;
+	border-top: 1px solid maroon;
 }
 .table>tbody>tr>td{
 	border: 1px solid maroon; 
@@ -102,6 +103,9 @@ box-shadow: none;
 }
 .dk-text-r{
 	text-align: right;
+}
+.dk-noresize{
+	resize: none;
 }
 /* 
 .navbar{

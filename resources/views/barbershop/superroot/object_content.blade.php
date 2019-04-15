@@ -4,7 +4,7 @@
 				<img src=" {{$bsobjects[0]->image}} " alt="Изображение" class="w-100">
 			</div> 	
 			<div class="row h-50 p-1">
-				<textarea class="w-100 p-2">
+				<textarea class="w-100 p-2 dk-noresize" >
 					{{$bsobjects[0]->comment}}
 				</textarea> 
 			</div>

@@ -25,3 +25,8 @@
 
     ai.classList.add("active");
   }
+  //Обработа клика по строке таблицы ObjectList 
+  function ObjectListOnclick(){
+    console.log(this.td1);
+
+  }

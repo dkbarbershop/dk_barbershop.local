@@ -9,8 +9,8 @@
   </thead>
   <tbody>
 	@foreach ($bsobjects as $bsobject)
-	<tr >
-	  <td> {{$bsobject->id}}</td>
+	<tr onclick='ObjectListOnclick();'>
+	  <td id="td1"> {{$bsobject->id}}</td>
 	  <td> {{$bsobject->name_rus}}</td>
 	  <td> {{$bsobject->name}}</td>
 	  <td> {{$bsobject->address}}</td>
