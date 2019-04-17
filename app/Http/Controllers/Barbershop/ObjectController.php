@@ -93,5 +93,15 @@ class ObjectController extends Controller
        $bsobjects = BsObject::all();
        return $bsobjects;
     }
-
+    public function getObject(){ 
+    $msg = "This is a simple message.";
+     return response()->json(array('msg'=> $msg), 200);
+    }
+    public function getbsobject(Request $request) {
+      $obj = $this->getObectById($request->id); 
+      return response()->json(array('bs_obj'=> $obj[0]), 200);
+   }
+    public function getObectById($obj){
+       return  BsObject::where('id',$obj)->get();
+    }
 }

@@ -107,6 +107,12 @@ box-shadow: none;
 .dk-noresize{
 	resize: none;
 }
+.dk-w-30{
+	width: 30%;
+}
+.dk-w-20{
+	width: 20%;
+}
 /* 
 .navbar{
 	background: mistyrose;

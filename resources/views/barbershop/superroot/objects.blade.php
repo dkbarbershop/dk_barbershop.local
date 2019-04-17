@@ -1,6 +1,6 @@
 @extends('barbershop.layouts.bs')
-<p hidden id="active_menu_item">menu_item_1</p>
 @section('content')
+<p hidden id="active_menu_item">menu_item_1</p>
 <div class="p-1 dk-context-top-div">
 	@include ('barbershop.superroot.object_content')
 </div>

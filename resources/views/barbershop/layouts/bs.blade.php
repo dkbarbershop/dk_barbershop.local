@@ -20,5 +20,6 @@
         </div>
         @include ('barbershop.layouts.about')  
         <script type="text/javascript" src="{{ asset('js/bs/main.js') }}"></script>
+        <!-- <script type="text/javascript" src="{{-- asset('js/bs/jquery.js') --}}"></script> -->
     </body>
 </html>

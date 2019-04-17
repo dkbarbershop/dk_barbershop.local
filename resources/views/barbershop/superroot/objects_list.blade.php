@@ -1,4 +1,5 @@
-<table class="table table-sm">
+<input type="hidden" name="_token" value = "{{ csrf_token() }}">
+<table class="table table-sm" id="objects_list">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -9,11 +10,12 @@
   </thead>
   <tbody>
 	@foreach ($bsobjects as $bsobject)
-	<tr onclick='ObjectListOnclick();'>
-	  <td id="td1"> {{$bsobject->id}}</td>
-	  <td> {{$bsobject->name_rus}}</td>
-	  <td> {{$bsobject->name}}</td>
-	  <td> {{$bsobject->address}}</td>
+	<tr>
+    <td class="d-none">{{ $bsobject->id }}</td>
+	  <td> {{ $loop->iteration }}</td>
+	  <td> {{ $bsobject->name_rus }}</td>
+	  <td> {{ $bsobject->name }}</td>
+	  <td> {{ $bsobject->address }}</td>
 	</tr>
    @endforeach
   </tbody>

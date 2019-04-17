@@ -1,6 +1,5 @@
 <!-- SuperRoot users -->
 @extends('barbershop.layouts.bs')
-<p hidden id="active_menu_item">menu_item_2</p>
 @section('content')
  <p hidden id="active_menu_item">menu_item_2</p>
  <div class="h-50 p-0 m-0 bg-info" style="overflow: auto;">
