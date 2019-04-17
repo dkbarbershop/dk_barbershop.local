@@ -46,13 +46,12 @@
      for (i = 0; i < left_menu_items.length; i++) { 
       left_menu_items[i].classList.remove("active");
     }
-
     ai.classList.add("active");
 
     //Обработа клика по строке таблицы ObjectList 
-    var ol = document.getElementById('objects_list');
+    var ol = document.getElementById('list');
       if(ol){
-      document.querySelector('#objects_list').onclick = function(ev) {
+      document.querySelector('#list').onclick = function(ev) {
         var id = 'id='+ev.target.parentElement.cells[0].innerHTML;
               $.ajax({
                  type:'POST',
@@ -67,5 +66,65 @@
             });
        }
       }
+      //Обработка клика кнопки "Новая запись" 
+      document.querySelector('#btn-new_record').onclick = function(ev) {
+        btnNewRecordClick();
+      }
+      //Обработка клика кнопки "Редактировать" 
+      document.querySelector('#btn-edit').onclick = function(ev) {
+        btnEditClick();
+      }
+      //Обработка клика кнопки "Удалить" 
+      document.querySelector('#btn-del').onclick = function(ev) {
+        btnDelClick();
+      }
+      //Обработка клика кнопки "Печать" 
+      document.querySelector('#btn-print').onclick = function(ev) {
+        btnPrintClick();
+      }
   }
-
+//Функция обработки клика кнопки "Новая запись"
+function btnNewRecordClick(){
+  switch ($('#btn-new_record').html()){
+    case 'Новая запись':
+      switch ($('#page').html()){
+        case 'objects':
+          setNewObjectContent();
+        break
+      }   
+    break
+    case 'Сохранить':
+      setButtonsToDefault();
+    break
+  }
+}
+//Функция обработки клика кнопки "Редактировать"
+function btnEditClick(){
+  switch ($('#btn-edit').html()){
+    case 'Отмена':
+      setButtonsToDefault();
+    break
+  }
+}
+//Функция обработки клика кнопки "Удалить"
+function btnDelClick(){
+  alert('btnDelClick');
+}
+//Функция обработки клика кнопки "Печать"
+function btnPrintClick(){
+  alert('btnPrintClick');
+}
+function setButtonsToDefault(){
+  $('#btn-new_record').html('Новая запись');
+  $('#btn-edit').html('Редактировать');
+  $('#btn-print').removeClass('d-none');
+  $('#btn-del').removeClass('d-none');
+  $('#list').removeClass('disabled_arrea');
+}
+function setNewObjectContent(){
+  $('#btn-new_record').html('Сохранить');
+  $('#btn-edit').html('Отмена');
+  $('#btn-print').addClass('d-none');
+  $('#btn-del').addClass('d-none');
+  $('#list').addClass('disabled_arrea');  
+}

@@ -38,6 +38,10 @@
 .dk-overflow-auto{
 	overflow: auto;	
 }
+.disabled_arrea{
+  pointer-events: none;
+  opacity: 0.4;
+}
 /* 
 
 

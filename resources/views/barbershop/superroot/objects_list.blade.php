@@ -1,5 +1,5 @@
 <input type="hidden" name="_token" value = "{{ csrf_token() }}">
-<table class="table table-sm" id="objects_list">
+<table  class="table table-sm highlight" id="list">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -10,7 +10,7 @@
   </thead>
   <tbody>
 	@foreach ($bsobjects as $bsobject)
-	<tr>
+	<tr id="row{{ $loop->iteration }}">
     <td class="d-none">{{ $bsobject->id }}</td>
 	  <td> {{ $loop->iteration }}</td>
 	  <td> {{ $bsobject->name_rus }}</td>
