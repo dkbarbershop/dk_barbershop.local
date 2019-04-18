@@ -42,6 +42,12 @@
   pointer-events: none;
   opacity: 0.4;
 }
+.dk-n-edit{
+	pointer-events: none;
+}
+.dk-w-image-button{
+	width: 200px;
+}
 /* 
 
 

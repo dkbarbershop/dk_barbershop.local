@@ -86,23 +86,37 @@
 //Функция обработки клика кнопки "Новая запись"
 function btnNewRecordClick(){
   switch ($('#btn-new_record').html()){
-    case 'Новая запись':
+    case 'Новая запись':{
+      setButtons();
       switch ($('#page').html()){
         case 'objects':
           setNewObjectContent();
         break
+       }
       }   
     break
-    case 'Сохранить':
+    case 'Сохранить':{
       setButtonsToDefault();
+      switch ($('#page').html()){
+        case 'objects':
+          setDefaultObjectContent();
+        break
+      } 
+    }
     break
   }
 }
 //Функция обработки клика кнопки "Редактировать"
 function btnEditClick(){
   switch ($('#btn-edit').html()){
-    case 'Отмена':
+    case 'Отмена':{
       setButtonsToDefault();
+      switch ($('#page').html()){
+        case 'objects':
+          setDefaultObjectContent();
+        break
+      }       
+    }
     break
   }
 }
@@ -122,9 +136,25 @@ function setButtonsToDefault(){
   $('#list').removeClass('disabled_arrea');
 }
 function setNewObjectContent(){
+  /*setButtons();*/
+  $('.dk-text-info').addClass('d-none');
+  $('.dk-input-field').removeClass('d-none');
+  $('.dk-input-field').val('');
+  $('.dk-td-input').removeClass('px-2');
+  /*$('#objComment').removeClass('dk-n-edit');*/
+  
+  
+}
+function setButtons(){
   $('#btn-new_record').html('Сохранить');
   $('#btn-edit').html('Отмена');
   $('#btn-print').addClass('d-none');
   $('#btn-del').addClass('d-none');
-  $('#list').addClass('disabled_arrea');  
+  $('#list').addClass('disabled_arrea'); 
+}
+function setDefaultObjectContent(){
+  $('.dk-text-info').removeClass('d-none');
+  $('.dk-input-field').addClass('d-none');
+  $('.dk-td-input').addClass('px-2'); 
+  /*$('#objComment').addClass('dk-n-edit');*/
 }
