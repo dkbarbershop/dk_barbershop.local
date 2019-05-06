@@ -25,8 +25,10 @@ Auth::routes();
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout'); 
 
+/*Route::put('create','Barbershop\ObjectController@create')->name('object_create');*/
+
 Route::group(['middleware'=>['web','auth']],function(){
-Route::get('/','BarberShop\LoginController@index')->name('login_index');
+    Route::get('/','BarberShop\LoginController@index')->name('login_index');
 });
 
 Route::group(['prefix'=>'error','middleware'=>['web','auth']],function(){
@@ -35,9 +37,11 @@ Route::group(['prefix'=>'error','middleware'=>['web','auth']],function(){
 
 Route::group(['prefix'=>'superroot','middleware'=>['web','auth','issuperroot']],function(){
     Route::get('object','Barbershop\ObjectController@index')->name('object_index');
-    /*Route::get('getobject','Barbershop\ObjectController@getObject')->name('get_object');*/
     Route::get('user','Barbershop\UserController@index')->name('user_index');
     Route::post('getobject','Barbershop\ObjectController@getbsobject');
+    /*Route::put('create','Barbershop\ObjectController@create')->name('object_create');*/
+    Route::resource('object', 'Barbershop\ObjectController', ['only' => ['store', 'update']]);
+
 });
 
 Route::group(['prefix'=>'director','middleware'=>['web','auth','isdirector']],function(){

@@ -17,7 +17,7 @@
         <div class="p-0 dk-f-l h-100 col-8 dk-text-color">
             <div class="dk-h-10p">
 				<h2 class="text-center font-weight-bold">Парикмахерская 
-					<span class="objNameRus">{{$bsobjects[0]->name_rus}}</span>
+					<span class="objNameRus dk-text-info">{{$bsobjects[0]->name_rus}}</span>
 				</h2>
             </div>
             <div class="dk-overflow-auto dk-h-90p pt-1 pl-1">
@@ -30,19 +30,19 @@
 						<td class="dk-text-color dk-font-bold dk-text-r px-2 dk-w-20">Название англ.</td>
 						<td class="dk-w-30 px-2 dk-td-input">
 							<span id="objName" class="dk-text-info" >{{$bsobjects[0]->name}}</span>
-							<input id="name" type="text" class="form-control h-100 py-0 d-none dk-input-field" placeholder="Название англ.">
+							<input required id="name" type="text" class="form-control h-100 py-0 d-none dk-input-field" placeholder="Название англ." >
 						</td>
 						<td class="dk-text-color dk-font-bold dk-text-r px-2 dk-w-20">Название русск.</td>
 						<td class="px-2  dk-w-30 dk-td-input">
 							<span class="dk-text-info objNameRus" >{{$bsobjects[0]->name_rus}}</span>
-							<input id="name_rus" type="text" class="form-control h-100 py-0 d-none d-none dk-input-field" placeholder="Название русск.">
+							<input required id="name_rus" type="text" class="form-control h-100 py-0 d-none d-none dk-input-field" placeholder="Название русск.">
 						</td>
 					</tr>
 					<tr>
 						<td class="dk-text-color dk-font-bold dk-text-r px-2">Адрес</td>
 						<td class="px-2 dk-td-input" colspan="3">
 							<span id="objAddress"  class="dk-text-info">{{$bsobjects[0]->address}}</span>
-							<input id="address" type="text" class="form-control h-100 py-0 d-none d-none dk-input-field" placeholder="Адрес">
+							<input required id="address" type="text" class="form-control h-100 py-0 d-none d-none dk-input-field" placeholder="Адрес">
 						</td>
 					</tr>					
 					<tr>
