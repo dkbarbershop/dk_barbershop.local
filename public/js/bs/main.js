@@ -20,7 +20,7 @@
       left_menu_items[i].classList.remove("active");
     }
     ai.classList.add("active");
-
+    //Обработка нажатия на строку списка 
     if(document.getElementById('list')){   
       document.querySelector('#list').onclick = function(ev) {
         leftMennuClick(ev);
@@ -57,20 +57,25 @@ function btn_about_click(){
   $('#about').modal('show');  
 }
 //*********************************************
-//Функция обработки клика на левом меню
+//Функция обработки клика на  списке объектов//левом меню
 function leftMennuClick(ev){
-  var id = 'id='+ev.target.parentElement.cells[0].innerHTML;
+  var this_id = ev.target.parentElement.cells[0].innerHTML
+  var id = 'id='+ this_id;
       $.ajax({
          type:'POST',
          url:'/superroot/getobject',
          data: id,
          success:function(data) {
            show_object(data);
+           /*highlight($(this));*/
          },
          error:function(){
           console.log('error in /superroot/getobject');
          }
     });
+    //Подсвечиваем активную строку
+    $('#list tr').removeClass('active_row');
+    $(ev.target.parentElement).addClass('active_row');   
 }
 //*********************************************
 function show_object(obj){
@@ -138,7 +143,9 @@ function btnDelClick(){
 //*********************************************
 //Функция обработки клика кнопки "Печать"
 function btnPrintClick(){
-  alert('btnPrintClick');
+  var block = document.getElementById("div_list");
+  block.scrollTop = block.scrollHeight;
+  /*block.scrollTop = 9999;*/
 }
 //*********************************************
 function setButtonsToDefault(){
@@ -171,27 +178,52 @@ function setDefaultObjectContent(){
   $('.dk-td-input').addClass('px-2'); 
 }
 //*********************************************
+//Функция сохранения объекта
 function saveObject(){ 
-  let resp_data = 'name='+$('#name').val()+
-                  '&name_rus='+$('#name_rus').val()+
-                  '&address='+$('#address').val()+
-                  '&comment='+$('#new_comment').val();
+  let resp_data = 
+    'name='+$('#name').val()+
+    '&name_rus='+$('#name_rus').val()+
+    '&address='+$('#address').val()+
+    '&comment='+$('#new_comment').val();
   $.ajax({
-   type:'POST',
-   url:'/superroot/object',
-   data:resp_data,
+    type:'POST',
+    url:'/superroot/object',
+    data:resp_data,
    success:function(resp_data) {
-     console.log(resp_data);
-     alert('Сохранено');
+    saveObjectSuccess(resp_data.id,resp_data.name,resp_data.name_rus,resp_data.address);
    },
    error:function(resp_data){
-    /*let err_masg[];*/
-    /*alert(resp_data.responseJSON.errors);*/
-    /*console.log('error in /superroot/object');*/
-    /*if(resp_data.responseJSON.errors.name)*/
-    console.log(resp_data.responseJSON);
+    message = '';
+    errors = resp_data.responseJSON.errors;
+    Object.keys(errors).forEach(function(key){
+        message += errors[key]+'\r\n';
+      });
+    alert(message);
    }
   });
-  return true;
+}
+//*********************************************
+function saveObjectSuccess(id,name,name_rus,address){
+     let table = document.getElementById('list');
+     let row_count = table.rows.length;
+     /*console.log(row_count);*/
+     $('#list tbody').append(
+      '<tr id="row'+row_count+'">'+
+      '<td class="d-none">'+id+'</td>'+
+      '<td>'+row_count+'</td>'+
+      '<td>'+name+'</td>'+
+      '<td>'+name_rus+'</td>'+
+      '<td>'+address+'</td>'+
+      '</tr>'
+      );
+      setButtonsToDefault();
+      setDefaultObjectContent();
+      alert('Сохранено');
+      //Перемещаем вертикальный ползунок вниз
+      var block = document.getElementById('div_list');
+      block.scrollTop = block.scrollHeight;
+      let c_row = '#row'+row_count;
+      //Подсвечиваем активную строку
+      $(c_row).children('td').eq(2).trigger('click'); 
 }
 //*********************************************

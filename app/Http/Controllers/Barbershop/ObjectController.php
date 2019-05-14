@@ -6,9 +6,8 @@ use App\Models\BsObject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Validator;
+/*use Validator;*/
 use App\Http\Requests\BsObjectRequest;
-/*use App\Http\Requests\BsObjectRequest;*/
 
 
 class ObjectController extends Controller
@@ -46,27 +45,13 @@ class ObjectController extends Controller
      */
     public function store(BsObjectRequest $request)
     {
- /*       $messages = [];
-        $validator = Validator::make($request->all(),['name' => 'required'],$messages);
-        if($validator->fails()){
-          return  redirect('object_index')->withErrors($validator)->withInput();
-        }*/
-/*        $this->validate($request, [
-        'name' => 'required',
-        'name_rus' => 'required',
-        'address' => 'required',]);
-*/
-       /* $user = Auth::user();*/
-/*
+        $user = Auth::user();
         $object_data = $request->all();
         $object_data['creator'] = $user->login;
         $object_data['last_modifer'] = $user->login;
         $bs_object = BsObject::create($object_data);
-        $msg = $request->all();*/
 
-       /* return response()->json(array('msg'=> $msg), 200);*/
-/*     return back()
-        ->withErrors(['msg' => 'Ошибка сохранения']);*/
+        return $bs_object; 
     }
  
 
@@ -118,10 +103,10 @@ class ObjectController extends Controller
        $bsobjects = BsObject::all();
        return $bsobjects;
     }
-    public function getObject(){ 
+/*    public function getObject(){ 
     $msg = "This is a simple message.";
      return response()->json(array('msg'=> $msg), 200);
-    }
+    }*/
     public function getbsobject(Request $request) {
       $obj = $this->getObectById($request->id); 
       return response()->json(array('bs_obj'=> $obj[0]), 200);

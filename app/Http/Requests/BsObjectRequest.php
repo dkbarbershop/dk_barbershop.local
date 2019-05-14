@@ -24,8 +24,15 @@ class BsObjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required|regex:/^[a-z,0-9,_-]+$/i',
+            'name_rus' => 'required',
+            'address' => 'required'
         ];
     }
-
+    public function attributes()
+    {
+        return ['name'      => 'Название англ.',
+                'name_rus'  => 'Название русск.' 
+                ];
+    }
 }

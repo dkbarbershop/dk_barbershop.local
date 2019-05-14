@@ -49,9 +49,9 @@ body{
 	padding-top: 0;
 	padding-bottom: 0;
 }
-.table>tbody>tr:nth-child(2n){
+/* .table>tbody>tr:nth-child(2n){
   background: pink;
-}
+} */
 .table>tbody>tr:hover{
   background: coral;
   cursor: pointer;
@@ -113,9 +113,17 @@ box-shadow: none;
 .dk-w-20{
 	width: 20%;
 }
+.active_row{
+	background-color: darksalmon;
+}
 /* 
 .navbar{
 	background: mistyrose;
 	text-align: right;
 }
  */
+/* .highlight {
+
+    background-color: rgb(255,0,0);
+
+} */

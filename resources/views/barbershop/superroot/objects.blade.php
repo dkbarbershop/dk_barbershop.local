@@ -8,8 +8,8 @@
 <div class="text-center dk-context-button-div">
 	@include ('barbershop.bs_content_buttons') 
 </div> 
-<div class="p-1 dk-context-bottom-div" >
-    <div class="h-100 dk-div-border dk-overflow-auto">
+<div class="p-1 dk-context-bottom-div">
+    <div class="h-100 dk-div-border dk-overflow-auto" id="div_list">
     	@include ('barbershop.superroot.objects_list') 
     </div>
 </div>
