@@ -4,15 +4,12 @@
 					<h4 class="text-center pt-2 d-none dk-input-field"> Изображение</h4>
 					<p class="text-center d-none dk-input-field">
 						<input type="file" name="file[]" id="file" class="inputfile" data-multiple-caption="{count} files selected" multiple />
-					
-
-						<!-- <input id="sortpicture" type="file" name="sortpic" multiple/> -->
-
 						<label for="file" class="btn btn-outline-dark dk-w-image-button">
 							<span id = "btn_select_image">Обзор 350х150</span>
 						</label>
 					</p>
 					<p class="text-center d-none dk-input-field">
+						<button type="submit" class="btn btn-outline-dark dk-w-image-button">Загрузить</button>
 					</p>
 					<img id="objImage" src=" {{$bsobjects[0]->image}} " alt="Изображение" class="w-100 h-100 dk-text-info ">
 				<!-- </form> -->
@@ -27,6 +24,7 @@
 				</textarea> 
 			</div>
         </div>
+        <!-- **** -->
         <div class="p-0 dk-f-l h-100 col-8 dk-text-color">
             <div class="dk-h-10p">
 				<h2 class="text-center font-weight-bold">Парикмахерская 

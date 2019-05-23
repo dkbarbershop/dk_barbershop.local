@@ -6,9 +6,10 @@ use App\Models\BsObject;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-/*use Validator;*/
 use App\Http\Requests\BsObjectRequest;
-
+use App\Http\Controllers\Barbershop\UploadController;
+/*use Illuminate\Support\Facades\Storage;*/
+use Storage;
 
 class ObjectController extends Controller
 {
@@ -43,15 +44,47 @@ class ObjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BsObjectRequest $request)
+   /* public function store(BsObjectRequest $request)*/
+  public function store(Request $request)
     {
+        
+        /*$object_storage_path = storage_path('images') .'/'.$object_data['name'];*/
+        /*dd($object_storage_path);*/
+        /*Storage::makeDirectory($object_storage_path, 0775, true); */
+   /*dd($object_storage_path);*/ 
         $user = Auth::user();
         $object_data = $request->all();
         $object_data['creator'] = $user->login;
         $object_data['last_modifer'] = $user->login;
-        $bs_object = BsObject::create($object_data);
 
-        return $bs_object; 
+        $object_storage_path = storage_path('images')."\\".$object_data['name'];
+        /*dd(storage_path());*/
+        Storage::makeDirectory(storage_path('/app/112'));
+        
+
+/*
+if(!Storage::exists('/path/to/your/directory')) {
+
+    Storage::makeDirectory('/path/to/create/your/directory', 0775, true); //creates directory
+
+}
+ */       
+/*$object_storage_path = storage_path('images') +'/'+ $object_data['name'];
+   dd($object_storage_path);*/
+/*if(!Storage::exists('/path/to/your/directory')){
+    Storage::makeDirectory($object_storage_path, 0775, true);     
+}
+
+        foreach ($request->file() as $file) {
+            foreach ($file as $f) {
+                //$f->move(storage_path('images'), time().'_'.$f->getClientOriginalName());
+                $f->move($object_storage_path, time().'_'.$f->getClientOriginalName());
+            }
+        }
+        unset($object_data['file']); 
+        $bs_object = BsObject::create($object_data);*/
+        /*return $bs_object;*/
+        /*return 'ok';*/
     }
  
 

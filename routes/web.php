@@ -39,9 +39,8 @@ Route::group(['prefix'=>'superroot','middleware'=>['web','auth','issuperroot']],
     Route::get('object','Barbershop\ObjectController@index')->name('object_index');
     Route::get('user','Barbershop\UserController@index')->name('user_index');
     Route::post('getobject','Barbershop\ObjectController@getbsobject');
-    /*Route::put('create','Barbershop\ObjectController@create')->name('object_create');*/
     Route::resource('object', 'Barbershop\ObjectController', ['only' => ['store', 'update']]);
-
+  /*  Route::post('upload','Barbershop\UploadController@upload')->name('upload_file');*/
 });
 
 Route::group(['prefix'=>'director','middleware'=>['web','auth','isdirector']],function(){
