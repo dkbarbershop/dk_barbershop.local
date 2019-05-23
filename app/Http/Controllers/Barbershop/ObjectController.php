@@ -50,6 +50,7 @@ class ObjectController extends Controller
         
         /*$object_storage_path = storage_path('images') .'/'.$object_data['name'];*/
         /*dd($object_storage_path);*/
+        /*fsdfsdfsdsdsdfsdf*/
         /*Storage::makeDirectory($object_storage_path, 0775, true); */
    /*dd($object_storage_path);*/ 
         $user = Auth::user();
