@@ -59,57 +59,11 @@
           fileName = e.target.value.split( '\\' ).pop();
 
         if( fileName )
-          label.querySelector( 'span' ).innerHTML = fileName.substring(0,20);
+          label.querySelector( 'span' ).innerHTML = fileName.substring(0,80);
         else
           label.innerHTML = labelVal;
       });
     });
-    //*********************************************
-    //Отправка данных
-    /*$('#input_form').on('submit', function(event){
-      submit_data(event);
-
-      event.preventDefault();
-      let formData = new FormData(this);
-      console.log(formData);
-    });*/
-/*       $('#input_form').on('submit',
-            e => {
-                e.preventDefault();
-                let formData = new FormData(e.currentTarget);
-                console.log(formData);
-                console.log(formData);
-                $.ajax({
-                    url:"{{ route('superroot.upload_file') }}",
-                    method: 'post',
-                    dataType: 'json',
-                    contentType: false,
-                    processData: false,
-                    data: formData,
-                    success:function(resp_data)
-                    {
-                      console.log(resp_data);
-                    },
-                    error:function(){
-                      console.log('error');
-                    }
-                }).done(
-                    data => {
-                  
-                    }
-                ).fail(
-                    e => {
-                    
-                    }
-                )
-            }
-        )
-*/
-
-    //*********************************************
-/*    $('input[type=file]').on('change', function(){
-      window.files = this.files;
-    });*/
   }
 //*********************************************
 function on_click_exit_app(){
@@ -147,7 +101,8 @@ function leftMennuClick(ev){
 }
 //*********************************************
 function show_object(obj){
-  $('#objImage').attr("src",obj.bs_obj.image);
+  /*console.log(obj);*/
+  $('#objImage').attr("src",obj.bs_obj.image_src);
   $('#сomment').html(obj.bs_obj.comment);
   $('.objNameRus').html(obj.bs_obj.name_rus);
   $('#objId').html(obj.bs_obj.id);
@@ -165,7 +120,6 @@ function btnNewRecordClick(){
   /*$('#btn_select_image').html('Обзор 350х150');*/
   switch ($('#btn-new_record').html()){
     case 'Новая запись':{
-
       setButtons();
       switch ($('#page').html()){
         case 'objects':
@@ -175,7 +129,7 @@ function btnNewRecordClick(){
       }   
     break
     case 'Сохранить':{
-      //if (confirm("Сохранить данные?")){    
+      if (confirm("Сохранить данные?")){    
         switch ($('#page').html()){
           case 'objects':{
             if(saveObject()){
@@ -185,7 +139,7 @@ function btnNewRecordClick(){
           }
           break
         } 
-      //}
+      }
     }
     break
   }
@@ -251,7 +205,7 @@ function setDefaultObjectContent(){
 //*********************************************
 //Функция сохранения объекта
 function saveObject(){ 
-
+  /*console.log('this is saveObject');*/
  let form = document.forms.input_form,
    formData = new FormData(form);
    formData.append('name',$('#name').val());
@@ -267,19 +221,19 @@ function saveObject(){
       processData: false, 
       contentType: false,
       success: function(resp_data){
-        console.log(resp_data);
-        //saveObjectSuccess(resp_data.id,resp_data.name,resp_data.name_rus,resp_data.address);
+        /*console.log(resp_data);*/
+        saveObjectSuccess(resp_data.id,resp_data.name,resp_data.name_rus,resp_data.address);
         return true;
       },
       error :function(resp_data) {
         console.log(resp_data);
-/*        let message = '';
+        let message = '';
         errors = resp_data.responseJSON.errors;
         Object.keys(errors).forEach(function(key){
           message += errors[key]+'\r\n';
         });
         alert(message);
-        return false;*/
+        return false;
       }
   });
 }
@@ -298,6 +252,7 @@ function saveObjectSuccess(id,name,name_rus,address){
       );
       setButtonsToDefault();
       setDefaultObjectContent();
+      $("#file").val("");
       alert('Сохранено');
       //Перемещаем вертикальный ползунок вниз
       var block = document.getElementById('div_list');
@@ -305,40 +260,5 @@ function saveObjectSuccess(id,name,name_rus,address){
       let c_row = '#row'+row_count;
       //Подсвечиваем активную строку
       $(c_row).children('td').eq(2).trigger('click'); 
-}
-//**********************************************
-function submit_data(event){
-  event.preventDefault();
-  let formData = new FormData(event.currentTarget);
-/*  var form = $("#input_form");
-  var u_data = new FormData(form);*/
-  console.log(formData);
-/* 
-  $.ajax({*/
-   /*url:"{{ route('ajaxupload.action') }}",*/
-/*   url:"{{ route('superroot.object') }}",
-   method:"POST",
-   data: u_data,
-   dataType:'JSON',
-   contentType: false,
-   cache: false,
-   processData: false,
-   success:function(resp_data)
-   {*/
-  /*  console.log(resp_data);*/
- /*   $('#message').css('display', 'block');
-    $('#message').html(data.message);
-    $('#message').addClass(data.class_name);
-    $('#uploaded_image').html(data.uploaded_image);*/
-/*   },
-    error:function(resp_data){
-    message = '';
-    errors = resp_data.responseJSON.errors;
-    Object.keys(errors).forEach(function(key){
-        message += errors[key]+'\r\n';
-      });
-    alert(message);
-   }
-  })*/
 }
 //**********************************************

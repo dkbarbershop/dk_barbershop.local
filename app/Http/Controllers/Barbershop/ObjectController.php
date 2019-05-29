@@ -10,6 +10,7 @@ use App\Http\Requests\BsObjectRequest;
 use App\Http\Controllers\Barbershop\UploadController;
 /*use Illuminate\Support\Facades\Storage;*/
 use Storage;
+use File;
 
 class ObjectController extends Controller
 {
@@ -18,6 +19,10 @@ class ObjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+   /* public $no_image_path = '\storage\barbershop\images\no_foto.jpg';*/
+    public $no_image_path = '/storage/barbershop/images/no_foto1.png';
+
     public function index()
     {   
         $user = Auth::user();
@@ -44,48 +49,29 @@ class ObjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-   /* public function store(BsObjectRequest $request)*/
-  public function store(Request $request)
+    public function store(BsObjectRequest $request)
+  /*public function store(Request $request)*/
     {
-        
-        /*$object_storage_path = storage_path('images') .'/'.$object_data['name'];*/
-        /*dd($object_storage_path);*/
-        /*fsdfsdfsdsdsdfsdf*/
-        /*Storage::makeDirectory($object_storage_path, 0775, true); */
-   /*dd($object_storage_path);*/ 
+        $first_file = true;
+       
         $user = Auth::user();
         $object_data = $request->all();
         $object_data['creator'] = $user->login;
         $object_data['last_modifer'] = $user->login;
-
-        $object_storage_path = storage_path('images')."\\".$object_data['name'];
-        /*dd(storage_path());*/
-        Storage::makeDirectory(storage_path('/app/112'));
-        
-
-/*
-if(!Storage::exists('/path/to/your/directory')) {
-
-    Storage::makeDirectory('/path/to/create/your/directory', 0775, true); //creates directory
-
-}
- */       
-/*$object_storage_path = storage_path('images') +'/'+ $object_data['name'];
-   dd($object_storage_path);*/
-/*if(!Storage::exists('/path/to/your/directory')){
-    Storage::makeDirectory($object_storage_path, 0775, true);     
-}
-
+        $st_path = 'storage/barbershop/'.$object_data['name'].'/images/obj';
+        $object_data['image'] =  $this->no_image_path;
         foreach ($request->file() as $file) {
             foreach ($file as $f) {
-                //$f->move(storage_path('images'), time().'_'.$f->getClientOriginalName());
-                $f->move($object_storage_path, time().'_'.$f->getClientOriginalName());
+                if($first_file){
+                    $object_data['image'] ='/'.$st_path.'/'.$f->getClientOriginalName();
+                    $first_file = false;
+                }
+                $f->move($st_path,$f->getClientOriginalName());
             }
         }
         unset($object_data['file']); 
-        $bs_object = BsObject::create($object_data);*/
-        /*return $bs_object;*/
-        /*return 'ok';*/
+        $bs_object = BsObject::create($object_data);
+        return $bs_object;
     }
  
 
@@ -135,6 +121,13 @@ if(!Storage::exists('/path/to/your/directory')) {
     }
     public function getObjects(){
        $bsobjects = BsObject::all();
+       foreach ($bsobjects as $bsobject) {
+        $find_file = public_path().$bsobject->image;
+        $exists = File::exists($find_file);
+        if (!(isset($bsobject->image) && $exists)) 
+            $bsobject->image_src = $this->no_image_path;
+        else $bsobject->image_src = $bsobject->image;
+       }
        return $bsobjects;
     }
 /*    public function getObject(){ 
@@ -142,7 +135,13 @@ if(!Storage::exists('/path/to/your/directory')) {
      return response()->json(array('msg'=> $msg), 200);
     }*/
     public function getbsobject(Request $request) {
-      $obj = $this->getObectById($request->id); 
+        $obj = $this->getObectById($request->id); 
+        $find_file = public_path().$obj[0]->image;
+        $exists = File::exists($find_file);
+        if (!(isset($obj[0]->image) && $exists)) 
+            $obj[0]->image_src = $this->no_image_path;
+        else $obj[0]->image_src = $obj[0]->image;
+       
       return response()->json(array('bs_obj'=> $obj[0]), 200);
    }
     public function getObectById($obj){
