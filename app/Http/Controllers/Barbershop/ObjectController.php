@@ -60,6 +60,7 @@ class ObjectController extends Controller
         $object_data['last_modifer'] = $user->login;
         $st_path = 'storage/barbershop/'.$object_data['name'].'/images/obj';
         $object_data['image'] =  $this->no_image_path;
+
         foreach ($request->file() as $file) {
             foreach ($file as $f) {
                 if($first_file){
@@ -71,6 +72,8 @@ class ObjectController extends Controller
         }
         unset($object_data['file']); 
         $bs_object = BsObject::create($object_data);
+        /*dd($bs_object);*/
+
         return $bs_object;
     }
  

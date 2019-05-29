@@ -19,7 +19,7 @@ class CreateObjectsTable extends Migration
             $table->string('name',50)->nullable();
             $table->string('name_rus',50)->nullable();
             $table->string('address',50)->nullable();
-            $table->string('image',50)->nullable();
+            $table->string('image',100)->nullable();
             $table->text('comment')->nullable();
             $table->string('creator',50)->nullable();
             $table->string('last_modifer',50)->nullable();

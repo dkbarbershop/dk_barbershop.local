@@ -59,7 +59,8 @@
           fileName = e.target.value.split( '\\' ).pop();
 
         if( fileName )
-          label.querySelector( 'span' ).innerHTML = fileName.substring(0,80);
+          /*label.querySelector( 'span' ).innerHTML = fileName.substring(0,80);*/
+          label.querySelector( 'span' ).innerHTML = fileName;
         else
           label.innerHTML = labelVal;
       });
@@ -212,6 +213,8 @@ function saveObject(){
    formData.append('name_rus',$('#name_rus').val());
    formData.append('address',$('#address').val());
    formData.append('comment',$('#new_comment').val());
+
+   console.log(formData);
 
     $.ajax({
       type:'POST',
