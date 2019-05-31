@@ -124,7 +124,7 @@ function btnNewRecordClick(){
       setButtons();
       switch ($('#page').html()){
         case 'objects':
-          setNewObjectContent();
+          setEmptyEditObjectContent();
         break
        }
       }   
@@ -148,40 +148,43 @@ function btnNewRecordClick(){
 //*********************************************
 //Функция обработки клика кнопки "Редактировать"
 function btnEditClick(){
-  switch ($('#btn-edit').html()){
-    case 'Отмена':{
-      setButtonsToDefault();
-      switch ($('#page').html()){
-        case 'objects':
-          setDefaultObjectContent();
-        break
-      }       
-    }
+ switch ($('#page').html()){ 
+  case 'objects':
+      editObject();
     break
   }
 }
 //*********************************************
 //Функция обработки клика кнопки "Удалить"
 function btnDelClick(){
-  alert('btnDelClick');
+  switch ($('#page').html()){
+    case 'objects':
+      delObject();
+    break
+  } 
 }
 //*********************************************
 //Функция обработки клика кнопки "Печать"
 function btnPrintClick(){
-  var block = document.getElementById("div_list");
-  block.scrollTop = block.scrollHeight;
-  /*block.scrollTop = 9999;*/
+  alert('Нажата кнопка "Печать"');
 }
 //*********************************************
+//Установка кнопок в дефолтное состояние
 function setButtonsToDefault(){
+  $('#btn-new_record').removeClass('d-none');
+  $('#btn-edit').removeClass('d-none');
+  $('#btn-del').removeClass('d-none');
+  $('#btn-print').removeClass('d-none');
+
   $('#btn-new_record').html('Новая запись');
   $('#btn-edit').html('Редактировать');
-  $('#btn-print').removeClass('d-none');
-  $('#btn-del').removeClass('d-none');
+  $('#btn-del').html('Удалить');
+  $('#btn-print').html('Печать');
+
   $('#list').removeClass('disabled_arrea');
 }
 //*********************************************
-function setNewObjectContent(){
+function setEmptyEditObjectContent(){
   /*setButtons();*/
   $('.dk-text-info').addClass('d-none');
   $('.dk-input-field').removeClass('d-none');
@@ -214,7 +217,7 @@ function saveObject(){
    formData.append('address',$('#address').val());
    formData.append('comment',$('#new_comment').val());
 
-   console.log(formData);
+   /*console.log(formData);*/
 
     $.ajax({
       type:'POST',
@@ -253,15 +256,104 @@ function saveObjectSuccess(id,name,name_rus,address){
       '<td>'+address+'</td>'+
       '</tr>'
       );
-      setButtonsToDefault();
-      setDefaultObjectContent();
-      $("#file").val("");
-      alert('Сохранено');
+
       //Перемещаем вертикальный ползунок вниз
       var block = document.getElementById('div_list');
       block.scrollTop = block.scrollHeight;
       let c_row = '#row'+row_count;
       //Подсвечиваем активную строку
       $(c_row).children('td').eq(2).trigger('click'); 
+
+      setButtonsToDefault();
+      setDefaultObjectContent();
+      $("#file").val("");
+      alert('Сохранено');
 }
 //**********************************************
+function delObject(){
+   switch ($('#btn-del').html()){
+    case 'Удалить':{
+      deleteObject();
+    }
+    break
+    case 'Отмена':{
+      setButtonsToDefault();
+      setDefaultObjectContent();
+    }
+    break
+   }
+}
+//**********************************************
+//Редактирование объекта
+function editObject(){
+  switch ($('#btn-edit').html()){
+    case 'Редактировать':{
+      setContentToObjEdit();
+      /*alert('Редактировать');*/
+    }
+    break
+    case 'Отмена':{
+      setButtonsToDefault();
+      setDefaultObjectContent();
+      break;
+  /*    switch ($('#page').html()){
+        case 'objects':
+          setDefaultObjectContent();
+        break
+      }*/       
+    }
+    break
+  }
+}
+//**********************************************
+//Установка состояния кнопок при нажатии на кнопку с надписью 
+//"Редактировать"[объект] 
+function setContentToObjEdit(){
+  //Установка кнопок
+  $('#btn-new_record').addClass('d-none');
+  $('#btn-print').addClass('d-none');
+  $('#btn-edit').html('Сохранить');
+  $('#btn-del').html('Отмена');
+  $('#list').addClass('disabled_arrea');
+
+  //Установка контента
+  setEmptyEditObjectContent();
+  loadDataToObjectContent();
+}
+//**********************************************
+//Непосредственное удаление объекта
+function deleteObject(){
+  if(confirm('Удалить объект?\n'+$('.objNameRus').html()+' ['+$('#objName').html()+']')){
+  let obj_id    = $('#objId').html(),
+      obj_name  = 'name='+$('#objName').html();
+    $.ajax({
+      type:'DELETE',
+      url:'/superroot/object/'+obj_id,
+      data: obj_name,
+      success: function(){
+        //Удаляем текущую строку из таблицы списка
+        var active_row_id = $('.active_row').attr('id');
+        $('#'+active_row_id).remove();
+        alert('Запись успешно удалена');
+        //Если вдруг захочется подсветить следующую/предидущую строки ...
+        //var x = active_row_id.substring(active_row_id.length-1,active_row_id.length);
+      },
+      error :function() {
+        alert('Ошибка при удалении записи\nfunction delObject()');
+      }
+    });
+  }
+}
+//**********************************************
+//Загрузка данных  в контент редактирования объекта
+function loadDataToObjectContent(){
+  $('.dk-text-info-edit').removeClass('d-none');
+  $('#name').val($('#objName').html());
+  $('#name_rus').val($('.objNameRus').html());
+  $('#address').val($('#objAddress').html());
+  /*$('#new_comment').val($('#comment').html());*/
+  $('#new_comment').val($('#сomment').val());
+  console.log ($('#сomment').html());
+  //new_comment
+
+}

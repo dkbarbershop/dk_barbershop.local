@@ -70,6 +70,9 @@ class ObjectController extends Controller
                 $f->move($st_path,$f->getClientOriginalName());
             }
         }
+        if(!File::isDirectory($st_path)){
+            File::makeDirectory($st_path, 0777, true, true);
+        }
         unset($object_data['file']); 
         $bs_object = BsObject::create($object_data);
         /*dd($bs_object);*/
@@ -117,10 +120,21 @@ class ObjectController extends Controller
      *
      * @param  \App\Models\Objects  $objects
      * @return \Illuminate\Http\Response
+     * При удалении записи:
+     *1. Переименовываем папку
+     *2. Удаляем саму запись
      */
-    public function destroy(Objects $objects)
+    /*public function destroy(Request $request)*/
+    public function destroy($id)
     {
-        //
+        $old_dir_name = public_path().'\storage\barbershop\\'.request()->name; 
+        if(File::isDirectory($old_dir_name)){
+            $new_dir_name = public_path().'\storage\barbershop\\_'.request()->name; 
+            rename ($old_dir_name, $new_dir_name);
+        }
+        $destroy_result =  BsObject::destroy($id);
+        return $destroy_result;
+        /*$destroy_result = 'true';*/
     }
     public function getObjects(){
        $bsobjects = BsObject::all();

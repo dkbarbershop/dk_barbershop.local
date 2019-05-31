@@ -30,7 +30,9 @@
 				<table class="w-100" id="dk-data-table">
 					<tr>
 						<td class="dk-text-color dk-font-bold dk-text-r px-2">id</td>
-						<td id="objId" colspan="3" class="px-2 dk-text-info">{{$bsobjects[0]->id}}</td>
+						<td id="objId" colspan="3" class="px-2 dk-text-info dk-text-info-edit">
+							{{$bsobjects[0]->id}}
+						</td>
 					</tr>
 					<tr>
 						<td class="dk-text-color dk-font-bold dk-text-r px-2 dk-w-20">Название англ.</td>
@@ -53,19 +55,29 @@
 					</tr>					
 					<tr>
 						<td class="dk-text-color dk-font-bold dk-text-r px-2">Изображение</td>
-						<td id="objImagePath" class="px-2 dk-text-info" colspan="3">{{$bsobjects[0]->image}}</td>
+						<td id="objImagePath" class="px-2 dk-text-info dk-text-info-edit" colspan="3">
+							{{$bsobjects[0]->image}}
+						</td>
 					</tr>						
 					<tr>
 						<td class="dk-text-color dk-font-bold dk-text-r px-2">Создал</td>
-						<td id="objCreator" class="px-2 dk-text-info">{{$bsobjects[0]->creator}}</td>
+						<td id="objCreator" class="px-2 dk-text-info dk-text-info-edit">
+							{{$bsobjects[0]->creator}}
+						</td>
 						<td class="dk-text-color dk-font-bold dk-text-r px-2">Изменил</td>
-						<td id="objModifer" class="px-2 dk-text-info">{{$bsobjects[0]->last_modifer}}</td>
+						<td id="objModifer" class="px-2 dk-text-info dk-text-info-edit">
+							{{$bsobjects[0]->last_modifer}}
+						</td>
 					</tr>					
 					<tr>
 						<td class="dk-text-color dk-font-bold dk-text-r px-2">Дата создания</td>
-						<td id="objCreatedAt" class="px-2 dk-text-info">{{$bsobjects[0]->created_at}}</td>
+						<td id="objCreatedAt" class="px-2 dk-text-info dk-text-info-edit">
+							{{$bsobjects[0]->created_at}}
+						</td>
 						<td class="dk-text-color dk-font-bold dk-text-r px-2">Дата изменения</td>
-						<td id="objUpdatedAt" class="px-2 dk-text-info">{{$bsobjects[0]->updated_at}}</td>
+						<td id="objUpdatedAt" class="px-2 dk-text-info dk-text-info-edit">
+							{{$bsobjects[0]->updated_at}}
+						</td>
 					</tr>
 				</table>				
             </div>
