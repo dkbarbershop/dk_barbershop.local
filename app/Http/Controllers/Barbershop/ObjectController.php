@@ -75,8 +75,6 @@ class ObjectController extends Controller
         }
         unset($object_data['file']); 
         $bs_object = BsObject::create($object_data);
-        /*dd($bs_object);*/
-
         return $bs_object;
     }
  
@@ -110,9 +108,18 @@ class ObjectController extends Controller
      * @param  \App\Models\Objects  $objects
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Objects $objects)
+    /*public function update(Request $request, Objects $objects)*/
+    public function update(Request $request , $bs_object_id)
     {
-        //
+        $user = Auth::user();
+        $obj_data = $request->all();
+        $obj_data['last_modifer'] = $user->login;
+        if(isset($obj_data['file']))
+            $obj_data['image'] = $this ->saveFileToDir($obj_data['file'],$obj_data['name']);
+
+        $bs_object = BsObject::find($bs_object_id);
+        $bs_object->fill($obj_data)->save();
+        return $bs_object;
     }
 
     /**
@@ -163,5 +170,19 @@ class ObjectController extends Controller
    }
     public function getObectById($obj){
        return  BsObject::where('id',$obj)->get();
+    }
+
+    public function saveFileToDir($in_file,$name){
+        $first_file = true;
+        $file_path = '';
+        $st_path = 'storage/barbershop/'.$name.'/images/obj';
+        foreach ($in_file as $file) {
+            if($first_file){
+                $file_path ='/'.$st_path.'/'.$file->getClientOriginalName();
+                $first_file = false;
+            }
+            $file->move($st_path,$file->getClientOriginalName());
+        }
+        return $file_path;
     }
 }

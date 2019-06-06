@@ -207,7 +207,7 @@ function setDefaultObjectContent(){
   $('.dk-td-input').addClass('px-2'); 
 }
 //*********************************************
-//Функция сохранения объекта
+//Функция сохранения нового объекта
 function saveObject(){ 
   /*console.log('this is saveObject');*/
  let form = document.forms.input_form,
@@ -229,6 +229,43 @@ function saveObject(){
       success: function(resp_data){
         /*console.log(resp_data);*/
         saveObjectSuccess(resp_data.id,resp_data.name,resp_data.name_rus,resp_data.address);
+        return true;
+      },
+      error :function(resp_data) {
+        /*console.log(resp_data);*/
+        let message = '';
+        errors = resp_data.responseJSON.errors;
+        Object.keys(errors).forEach(function(key){
+          message += errors[key]+'\r\n';
+        });
+        alert(message);
+        return false;
+      }
+  });
+}
+//*********************************************
+//Функция сохранения отредактированного объекта
+function saveEditedObject(){ 
+ let form = document.forms.input_form,
+      obj_id = $('#objId').html(),
+     formData = new FormData(form);
+     formData.append('name',$('#name').val());
+     formData.append('name_rus',$('#name_rus').val());
+     formData.append('address',$('#address').val());
+     formData.append('comment',$('#new_comment').val());
+     formData.append('_method','PUT');//Это важно!!! Сюда добавляем 'PUT' а в
+     //ajx запросе поле type ставим 'POST'
+ 
+    $.ajax({
+      type:'POST',
+      url:'/superroot/object/'+obj_id,
+      data    : formData,
+      dataType: 'json',
+      processData: false, 
+      contentType: false,
+      success: function(resp_data){
+        /*console.log(resp_data);*/
+        editObjectSuccess(resp_data);
         return true;
       },
       error :function(resp_data) {
@@ -289,18 +326,20 @@ function editObject(){
   switch ($('#btn-edit').html()){
     case 'Редактировать':{
       setContentToObjEdit();
-      /*alert('Редактировать');*/
     }
     break
     case 'Отмена':{
       setButtonsToDefault();
-      setDefaultObjectContent();
-      break;
-  /*    switch ($('#page').html()){
-        case 'objects':
-          setDefaultObjectContent();
-        break
-      }*/       
+      setDefaultObjectContent();    
+    }
+    break
+    case 'Сохранить':{
+       if (confirm("Сохранить отредактированные данные?")){
+          if(saveEditedObject()){
+            setButtonsToDefault();
+            setDefaultObjectContent();
+          }
+        }   
     }
     break
   }
@@ -353,7 +392,21 @@ function loadDataToObjectContent(){
   $('#address').val($('#objAddress').html());
   /*$('#new_comment').val($('#comment').html());*/
   $('#new_comment').val($('#сomment').val());
-  console.log ($('#сomment').html());
-  //new_comment
-
 }
+//**********************************************
+function editObjectSuccess(resp_data){
+  setButtonsToDefault();
+  setDefaultObjectContent();
+  loadEditDataToObjectContent(resp_data);
+  $("#file").val("");
+  alert('Сохранено');
+}
+//**********************************************
+function loadEditDataToObjectContent(resp_data) {
+  let active_row_id = $('.active_row').attr('id');
+  $('#'+active_row_id+' :nth-child(3)').html(resp_data['name_rus']);
+  $('#'+active_row_id+' :nth-child(4)').html(resp_data['name']);
+  $('#'+active_row_id+' :nth-child(5)').html(resp_data['address']);
+  $('#'+active_row_id).children('td').eq(2).trigger('click'); 
+}
+
