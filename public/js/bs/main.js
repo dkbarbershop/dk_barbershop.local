@@ -118,31 +118,11 @@ function show_object(obj){
 //*********************************************
 //Функция обработки клика кнопки "Новая запись"
 function btnNewRecordClick(){
-  /*$('#btn_select_image').html('Обзор 350х150');*/
-  switch ($('#btn-new_record').html()){
-    case 'Новая запись':{
-      setButtons();
-      switch ($('#page').html()){
-        case 'objects':
-          setEmptyEditObjectContent();
-        break
-       }
-      }   
-    break
-    case 'Сохранить':{
-      if (confirm("Сохранить данные?")){    
-        switch ($('#page').html()){
-          case 'objects':{
-            if(saveObject()){
-              setButtonsToDefault();
-              setDefaultObjectContent();
-            }
-          }
-          break
-        } 
-      }
-    }
-    break
+  switch ($('#page').html()){ 
+  case 'objects':
+      newObject();
+  break
+  
   }
 }
 //*********************************************
@@ -404,9 +384,27 @@ function editObjectSuccess(resp_data){
 //**********************************************
 function loadEditDataToObjectContent(resp_data) {
   let active_row_id = $('.active_row').attr('id');
-  $('#'+active_row_id+' :nth-child(3)').html(resp_data['name_rus']);
-  $('#'+active_row_id+' :nth-child(4)').html(resp_data['name']);
+  $('#'+active_row_id+' :nth-child(3)').html(resp_data['name']);
+  $('#'+active_row_id+' :nth-child(4)').html(resp_data['name_rus']);
   $('#'+active_row_id+' :nth-child(5)').html(resp_data['address']);
   $('#'+active_row_id).children('td').eq(2).trigger('click'); 
 }
-
+//**********************************************
+function newObject(){
+  switch ($('#btn-new_record').html()){
+    case 'Новая запись':{
+      setButtons();
+      setEmptyEditObjectContent();
+    }   
+    break
+    case 'Сохранить':{
+      if (confirm("Сохранить данные?")){    
+        if(saveObject()){
+          setButtonsToDefault();
+          setDefaultObjectContent();
+        }
+      }
+    }
+    break
+  }
+}

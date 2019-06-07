@@ -21,7 +21,7 @@ class ObjectController extends Controller
      */
 
    /* public $no_image_path = '\storage\barbershop\images\no_foto.jpg';*/
-    public $no_image_path = '/storage/barbershop/images/no_foto1.png';
+    public $no_image_path = '/storage/barbershop/images/no_photo.png';
 
     public function index()
     {   
@@ -58,9 +58,11 @@ class ObjectController extends Controller
         $object_data = $request->all();
         $object_data['creator'] = $user->login;
         $object_data['last_modifer'] = $user->login;
-        $st_path = 'storage/barbershop/'.$object_data['name'].'/images/obj';
-        $object_data['image'] =  $this->no_image_path;
+        $bs_object_crate = BsObject::create($object_data);
 
+        $st_path = 'storage/barbershop/'.$bs_object_crate->id.'/images/obj';
+
+        $object_data['image'] =  $this->no_image_path;
         foreach ($request->file() as $file) {
             foreach ($file as $f) {
                 if($first_file){
@@ -70,11 +72,14 @@ class ObjectController extends Controller
                 $f->move($st_path,$f->getClientOriginalName());
             }
         }
+
+        $bs_object = BsObject::find($bs_object_crate->id);
+        $bs_object->fill($object_data)->save();
+        
         if(!File::isDirectory($st_path)){
             File::makeDirectory($st_path, 0777, true, true);
         }
-        unset($object_data['file']); 
-        $bs_object = BsObject::create($object_data);
+        
         return $bs_object;
     }
  
@@ -115,7 +120,7 @@ class ObjectController extends Controller
         $obj_data = $request->all();
         $obj_data['last_modifer'] = $user->login;
         if(isset($obj_data['file']))
-            $obj_data['image'] = $this ->saveFileToDir($obj_data['file'],$obj_data['name']);
+            $obj_data['image'] = $this ->saveFileToDir($obj_data['file'],$bs_object_id);
 
         $bs_object = BsObject::find($bs_object_id);
         $bs_object->fill($obj_data)->save();
@@ -134,14 +139,13 @@ class ObjectController extends Controller
     /*public function destroy(Request $request)*/
     public function destroy($id)
     {
-        $old_dir_name = public_path().'\storage\barbershop\\'.request()->name; 
+        $old_dir_name = public_path().'\storage\barbershop\\'.$id; 
         if(File::isDirectory($old_dir_name)){
-            $new_dir_name = public_path().'\storage\barbershop\\_'.request()->name; 
+            $new_dir_name = public_path().'\storage\barbershop\\_'.$id; 
             rename ($old_dir_name, $new_dir_name);
         }
         $destroy_result =  BsObject::destroy($id);
         return $destroy_result;
-        /*$destroy_result = 'true';*/
     }
     public function getObjects(){
        $bsobjects = BsObject::all();

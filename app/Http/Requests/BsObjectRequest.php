@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Http\Requests;
 
@@ -24,7 +24,8 @@ class BsObjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:bs_objects|regex:/^[a-z,A-Z,0-9,_-]+$/',
+            /*'name' => 'required|unique:bs_objects|regex:/^[a-z,A-Z,0-9,_-]+$/',*/
+            'name' => 'required|regex:/^[a-z,A-Z,0-9,_-]+$/',
             'name_rus' => 'required',
             'address' => 'required'
         ];

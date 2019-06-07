@@ -17,10 +17,25 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if (view()->exists('barbershop.superroot.users')){
-            return view('barbershop.superroot.users',['user_role'=>$user->role]);
+
+        switch ($user->login) {
+        case 'SuperRoot':{
+            if (view()->exists('barbershop.superroot.users')){
+                $role = ['SuperRoot','Director'];
+                $usersList = $this->getUsersByRole($role);
+                $c_user = $this->getUserById($usersList[0]->id);
+                return view('barbershop.superroot.users',[
+                    'user_role' =>$user->role,
+                    'usersList' =>$usersList,
+                    'c_user'    =>$c_user
+                    ]);
+                return view('barbershop.superroot.users',[
+                    'user_role' =>$user->role]);
+            }
+            abort(404);
         }
-        abort(404);
+        break;
+        }
     }
 
     /**
@@ -102,5 +117,13 @@ class UserController extends Controller
             return view('barbershop.user.settings',['user_role'=>$user->role]);
         }
         abort(404);
+    }
+    public function getUserById($id){
+        $user = User::where('id',$id)->get();
+        return $user;
+    }
+    public function getUsersByRole($role){
+        $user = User::whereIn('role',$role)->orderBy('role')->get();
+        return $user;
     }
 }
